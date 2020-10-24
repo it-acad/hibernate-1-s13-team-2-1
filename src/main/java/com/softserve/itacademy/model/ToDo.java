@@ -32,9 +32,8 @@ public class ToDo {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    //TODO when implemented
-    //@OneToMany(mappedBy = "toDo")
-    //private List<Task> tasks;
+    @OneToMany(mappedBy = "toDo")
+    private List<Task> tasks;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
