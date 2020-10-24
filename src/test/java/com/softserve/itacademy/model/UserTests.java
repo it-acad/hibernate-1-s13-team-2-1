@@ -2,6 +2,7 @@ package com.softserve.itacademy.model;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.params.ParameterizedTest;
 
 @SpringBootTest
 public class UserTests {
@@ -45,7 +45,6 @@ public class UserTests {
         user.setLastName("Valid-Name");
         user.setPassword("qwQW12!@");
         user.setRole(traineeRole);
-
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -112,6 +111,28 @@ public class UserTests {
                 Arguments.of("Invalid-", "Invalid-"),
                 Arguments.of("Invalid-invalid", "Invalid-invalid")
         );
+    }
+
+    // Coverage and sanity check
+    @Test
+    void usersEquals() {
+        User user = new User();
+        user.setEmail("rty5@i.ua");
+        user.setFirstName("Valid-Name");
+        user.setLastName("Valid-Name");
+        user.setPassword("qwQW12!@");
+        user.setRole(traineeRole);
+
+        User user2 = new User();
+        user2.setEmail("rty5@i.ua");
+        user2.setFirstName("Valid-Name");
+        user2.setLastName("Valid-Name");
+        user2.setPassword("qwQW12!@");
+        user2.setRole(traineeRole);
+
+        assertEquals(user, user2);
+        assertEquals(user.toString(), user2.toString());
+        assertEquals(user.hashCode(), user2.hashCode());
     }
 
 }
